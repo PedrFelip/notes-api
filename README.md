@@ -1,7 +1,6 @@
 # Notes-api
 
-Funcionalidades Básicas
-- Criar, ler, atualizar e excluir notas.
+Funcionalidades Básicas das Notas
 - [x] Criar
 - [ ] Ler
 - [ ] Atualizar
