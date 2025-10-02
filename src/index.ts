@@ -1,7 +1,11 @@
 import { fastify } from 'fastify'
 import { notesRoutes } from './modules/notes/notes.routes.ts'
+import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod'
 
 const app = fastify()
+
+app.setValidatorCompiler(validatorCompiler)
+app.setSerializerCompiler(serializerCompiler)
 
 app.get('/', async () => {
   return { status: 'check' }
