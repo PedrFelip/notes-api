@@ -1,8 +1,20 @@
 import { fastify } from 'fastify'
 import { notesRoutes } from './modules/notes/notes.routes.ts'
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod'
+import { trace } from 'console'
 
-const app = fastify()
+const app = fastify({
+  logger: {
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        translateTime: 'HH:MM:ss Z',
+        ignore: 'pid,hostname',
+        colorize: true
+      }
+    }
+  }
+})
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
