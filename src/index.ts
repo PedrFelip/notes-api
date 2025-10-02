@@ -1,9 +1,14 @@
 import { fastify } from 'fastify'
+import { notesRoutes } from './modules/notes/notes.routes.ts'
 
 const app = fastify()
 
 app.get('/', async () => {
   return { status: 'check' }
+})
+
+app.register(notesRoutes, {
+  prefix: '/api',
 })
 
 app.listen({ port: 3000, host: '0.0.0.0'}, (err, address) => {
