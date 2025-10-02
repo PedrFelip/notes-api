@@ -10,4 +10,13 @@ export class NoteRepository {
     })
     return note
   }
+
+  async findDuplicateTitle(data: createNoteDTO) {
+    const note = await this.prisma.note.count({
+      where: {
+        titulo: { startsWith: data.titulo }
+      }
+    })
+    return note
+  }
 }
