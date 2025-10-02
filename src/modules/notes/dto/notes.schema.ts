@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const createNoteSchema = z.object({
+export const createNoteSchema = z.object({
   titulo: z.string().min(2).max(100),
   conteudo: z.string().min(10).max(1000),
 })
@@ -14,4 +14,4 @@ const noteSchema = z.object({
 })
 
 export type Note = z.infer<typeof noteSchema>
-export type CreateNoteInput = z.infer<typeof createNoteSchema>
+export type createNoteDTO = z.infer<typeof createNoteSchema>
