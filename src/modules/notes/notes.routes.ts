@@ -5,8 +5,11 @@ import { NoteController } from './note.controller.ts'
 
 const controller = new NoteController()
 
-export async function notesRoutes(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().post<{ Body: createNoteDTO }>(
+export async function notesRoutes(server: FastifyInstance) {
+
+  const app = server.withTypeProvider<ZodTypeProvider>()
+
+  app.post<{ Body: createNoteDTO }>(
     '/notes',
     {
       schema: {
