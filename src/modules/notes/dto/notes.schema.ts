@@ -1,4 +1,4 @@
-import { uuid, z } from 'zod'
+import { z } from 'zod'
 
 export const createNoteSchema = z.object({
   titulo: z.string()
