@@ -1,6 +1,11 @@
 import type { FastifyInstance } from 'fastify'
 import { type ZodTypeProvider } from 'fastify-type-provider-zod'
-import { type createNoteDTO, createNoteSchema} from './dto/notes.schema.ts'
+import { 
+  type createNoteDTO, 
+  createNoteSchema, 
+  readNote, 
+  type readNoteDTO
+} from './dto/notes.schema.ts'
 import { NoteController } from './note.controller.ts'
 
 const controller = new NoteController()
@@ -24,4 +29,21 @@ export async function notesRoutes(server: FastifyInstance) {
       reply.status(500).send(error)
     }
   })
+
+  app.post<{ Body: readNoteDTO }>(
+    '/notes/read',
+    {
+      schema: {
+        body: readNote
+      }
+    },
+    async (request, reply) => {
+      try {
+        const note = await controller.read(request.body)
+        reply.status(200).send(note)
+      } catch (error) {
+        reply.status(500).send(error)
+      }
+    }
+  )
 }
