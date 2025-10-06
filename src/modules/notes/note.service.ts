@@ -1,4 +1,4 @@
-import { type createNoteDTO } from './dto/notes.schema.ts'
+import type { readNoteDTO, createNoteDTO } from './dto/notes.schema.ts'
 import { NoteRepository } from './note.repository.ts'
 
 export class NoteService {
@@ -11,6 +11,15 @@ export class NoteService {
     }
 
     const note = await this.repo.create(data)
+    return note
+  }
+
+  async read(id: readNoteDTO) {
+    const note = await this.repo.read(id)
+  
+    if (note === null){
+      return "Nenhuma nota encontrada"
+    }
     return note
   }
 }
