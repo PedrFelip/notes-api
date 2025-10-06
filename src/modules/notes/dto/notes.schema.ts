@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { uuid, z } from 'zod'
 
 export const createNoteSchema = z.object({
   titulo: z.string()
@@ -7,6 +7,10 @@ export const createNoteSchema = z.object({
   conteudo: z.string()
     .min(10, { message: 'Conteúdo deve ter pelo menos 10 caracteres' })
     .max(1000, { message: 'Conteúdo deve ter no máximo 1000 caracteres' }),
+})
+
+export const readNote = z.object({
+  id: z.uuid()
 })
 
 const noteSchema = z.object({
@@ -19,3 +23,4 @@ const noteSchema = z.object({
 
 export type Note = z.infer<typeof noteSchema>
 export type createNoteDTO = z.infer<typeof createNoteSchema>
+export type readNoteDTO = z.infer<typeof readNote>
