@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import type { readNoteDTO, createNoteDTO } from './dto/notes.schema.ts'
+import type { readNoteDTO, createNoteDTO, updateNoteDTO } from './dto/notes.schema.ts'
 
 export class NoteRepository {
   private prisma = new PrismaClient()
@@ -23,6 +23,19 @@ export class NoteRepository {
     const note = await this.prisma.note.findUnique({
       where: {
         id: noteId.id
+      }
+    })
+    return note
+  }
+
+  async update(idNote: string, data: updateNoteDTO) {
+    const note = await this.prisma.note.update({
+      where: {
+        id: idNote
+      },
+      data: {
+        titulo: data.titulo,
+        conteudo: data.conteudo
       }
     })
     return note
