@@ -9,7 +9,6 @@ import {
   updateNoteSchema
 } from './dto/notes.schema.ts'
 import { NoteController } from './note.controller.ts'
-import { request } from 'http'
 
 const controller = new NoteController()
 
@@ -33,16 +32,11 @@ export async function notesRoutes(server: FastifyInstance) {
     }
   })
 
-  app.post<{ Body: readNoteDTO }>(
-    '/notes/read',
-    {
-      schema: {
-        body: readNote
-      }
-    },
+  app.get<{ Params: { id: any } }>(
+    '/notes/read/:id',
     async (request, reply) => {
       try {
-        const note = await controller.read(request.body)
+        const note = await controller.read(request.params)
         reply.status(200).send(note)
       } catch (error) {
         reply.status(500).send(error)
