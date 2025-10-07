@@ -10,20 +10,19 @@ export class NoteRepository {
     })
     return note
   }
-
-  async read(noteId: readNoteDTO) {
-    const note = await this.prisma.note.findUnique({
+  async findDuplicateTitle(data: createNoteDTO) {
+    const note = await this.prisma.note.count({
       where: {
-        id: noteId.id
+        titulo: { startsWith: data.titulo }
       }
     })
     return note
   }
 
-  async findDuplicateTitle(data: createNoteDTO) {
-    const note = await this.prisma.note.count({
+  async read(noteId: readNoteDTO) {
+    const note = await this.prisma.note.findUnique({
       where: {
-        titulo: { startsWith: data.titulo }
+        id: noteId.id
       }
     })
     return note
