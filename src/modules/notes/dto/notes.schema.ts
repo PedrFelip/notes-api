@@ -21,6 +21,18 @@ const noteSchema = z.object({
   updatedAt: z.date().default(() => new Date()),
 })
 
+export const updateNoteSchema = z.object({
+  titulo: z.string()
+    .min(2, { message: 'Título deve ter pelo menos 2 caracteres' })
+    .max(100, { message: 'Título deve ter no máximo 100 caracteres' })
+    .optional(),
+  conteudo: z.string()
+    .min(10, { message: 'Conteúdo deve ter pelo menos 10 caracteres' })
+    .max(1000, { message: 'Conteúdo deve ter no máximo 1000 caracteres' })
+    .optional(),
+})
+
 export type Note = z.infer<typeof noteSchema>
 export type createNoteDTO = z.infer<typeof createNoteSchema>
 export type readNoteDTO = z.infer<typeof readNote>
+export type updateNoteDTO = z.infer<typeof updateNoteSchema>
