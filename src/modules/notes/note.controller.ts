@@ -1,4 +1,4 @@
-import type {readNoteDTO, createNoteDTO } from './dto/notes.schema.ts'
+import type {readNoteDTO, createNoteDTO, updateNoteDTO } from './dto/notes.schema.ts'
 import { NoteService } from './note.service.ts'
 
 export class NoteController {
@@ -10,5 +10,9 @@ export class NoteController {
 
   async read(id: readNoteDTO) {
     return this.service.read(id)
+  }
+
+  async update(idNote: string, data: updateNoteDTO) {
+    return this.service.update(idNote, data)
   }
 }
