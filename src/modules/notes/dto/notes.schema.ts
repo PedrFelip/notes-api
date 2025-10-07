@@ -32,6 +32,10 @@ export const updateNoteSchema = z.object({
     .optional(),
 })
 
+export const idParamSchema = z.object({
+  id: z.uuid('Id deve ser um UUID válido')
+})
+
 export type Note = z.infer<typeof noteSchema>
 export type createNoteDTO = z.infer<typeof createNoteSchema>
 export type readNoteDTO = z.infer<typeof readNote>

@@ -3,6 +3,7 @@ import { type ZodTypeProvider } from 'fastify-type-provider-zod'
 import { 
   type createNoteDTO, 
   createNoteSchema, 
+  idParamSchema, 
   readNote, 
   type readNoteDTO,
   type updateNoteDTO,
@@ -44,7 +45,7 @@ export async function notesRoutes(server: FastifyInstance) {
     }
   )
 
-  app.post<{ Params: { id: any }; Body: updateNoteDTO }>(
+  app.patch<{ Params: { id: any }; Body: updateNoteDTO }>(
     '/notes/update/:id',
     {
       schema: {
@@ -52,7 +53,7 @@ export async function notesRoutes(server: FastifyInstance) {
       }
     },
     async (request, reply) => {
-      const { id } = request.params
+      const { id } = idParamSchema.parse(request.params)
       const update = request.body
 
       try {
