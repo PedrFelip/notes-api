@@ -3,7 +3,7 @@
 Funcionalidades Básicas das Notas
 - [x] Criar
 - [x] Ler
-- [ ] Atualizar
+- [x] Atualizar
 - [ ] Excluir
 > Cada nota tem: título, conteúdo, data de criação e última modificação.
 
