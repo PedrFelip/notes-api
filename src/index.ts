@@ -5,6 +5,7 @@ import { trace } from 'console'
 
 const app = fastify({
   logger: {
+    file: './logs/notes-api.log',
     transport: {
       target: 'pino-pretty',
       options: {
