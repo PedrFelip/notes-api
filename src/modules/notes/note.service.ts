@@ -27,4 +27,14 @@ export class NoteService {
   async update(idNote: string ,data: updateNoteDTO) {
     return this.repo.update(idNote, data)
   }
+
+  async delete(noteId: string) {
+    const note = await this.repo.read({ id: noteId })
+    
+    if (note === null) {
+      throw new Error('Nota não encontrada')
+    }
+
+    return this.repo.delete(noteId)
+  }
 }
