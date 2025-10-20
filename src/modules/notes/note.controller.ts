@@ -15,4 +15,8 @@ export class NoteController {
   async update(idNote: string, data: updateNoteDTO) {
     return this.service.update(idNote, data)
   }
+
+  async delete(noteId: string) {
+    return this.service.delete(noteId)
+  }
 }

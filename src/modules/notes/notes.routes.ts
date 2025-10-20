@@ -10,6 +10,7 @@ import {
   updateNoteSchema
 } from './dto/notes.schema.ts'
 import { NoteController } from './note.controller.ts'
+import { log } from 'node:console'
 
 const controller = new NoteController()
 
@@ -61,6 +62,27 @@ export async function notesRoutes(server: FastifyInstance) {
         reply.status(200).send(note)
       } catch (error) {
         reply.status(500).send(error)
+      }
+    }
+  )
+
+  app.delete<{ Params: { id: string } }>(
+    '/notes/delete/:id',
+    {
+      schema: {
+        params: idParamSchema
+      }
+    },
+    async (request, reply) => {
+      const { id } = request.params
+
+      try {
+        await controller.delete(id)
+        reply.status(204).send()
+      } catch (error) {
+        reply.status(404).send({
+          message: error,
+        })
       }
     }
   )
